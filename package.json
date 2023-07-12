@@ -2,7 +2,7 @@
   "name": "jokes",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://phanindrababu5868.github.io/chucknorris-jokes-app",
+  "homepage": "https://phanindrababu5868.github.io/mrbbb",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
