@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { Bars } from "react-loader-spinner";
+import "./App.css";
+import Categories from "./Components/Categories/index";
 
 function App() {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let fetchCategories = async () => {
+      setLoading(true);
+      const fetchData = await fetch(
+        "https://api.chucknorris.io/jokes/categories"
+      );
+      const jsonData = await fetchData.json();
+      setLoading(false);
+      setCategories(jsonData);
+    };
+    fetchCategories();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {loading ? (
+        <div className="loader-bg-container">
+          <Bars color="#ffffff" height={50} width={50} />
+        </div>
+      ) : (
+        <div className="home-bg-container">
+          <h1 className="heading">Chuck Norries</h1>
+          <Categories categories={categories} />
+        </div>
+      )}
+    </>
   );
 }
 
